@@ -5,18 +5,17 @@ from PIL import Image
 from torchvision import transforms
 from torchvision.models.detection import fasterrcnn_resnet50_fpn
 
-# ✅ Cho phép load class FasterRCNN (fix lỗi pickle)
+
 torch.serialization.add_safe_globals([fasterrcnn_resnet50_fpn])
 
-# ✅ Thiết bị
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# ✅ Load nguyên model đã lưu bằng torch.save(model)
+
 model = torch.load("model/model.pth", map_location=device, weights_only=False)
 model.to(device)
 model.eval()
 
-# ✅ Tên các class — thứ tự phải đúng với khi mày train
+
 CLASS_NAMES = [
     "__background__",        # ID 0
     "door_scratch",          # ID 1
@@ -28,13 +27,13 @@ CLASS_NAMES = [
     "tail_lamp"              # ID 7
 ]
 
-# ✅ Transform ảnh vào
+
 transform = transforms.Compose([
     transforms.Resize((640, 640)),
     transforms.ToTensor()
 ])
 
-# ✅ Hàm dự đoán ảnh
+
 def predict_image(image_path, output_path="static/result.jpg", conf_thresh=0.5):
     # Load ảnh và chuyển tensor
     image = Image.open(image_path).convert("RGB")

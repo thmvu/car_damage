@@ -3,6 +3,7 @@ from flask import Flask, request, render_template, redirect, url_for
 from werkzeug.utils import secure_filename
 from predict import predict_image
 
+# khoi tạo flask
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)

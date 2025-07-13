@@ -1,1 +1,3 @@
-echo "model/model.pth" >> .gitignore
+# Bỏ qua file model
+model/model.pth
+model/car_damage_model.pth
